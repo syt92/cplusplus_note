@@ -34,3 +34,25 @@ public:
 Input: nums = [3,2,4], target = 6, Output: [1,2]</br>
 i=0 : j=1, j=2</br>
 i=1 : j=2
+
+```c++
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> maps;
+        int i, tmp;
+        //build unordered_map maps
+        for(i=0; i<nums.size(); i++)
+            maps[nums[i]] = i;
+        for(i=0; i<nums.size(); i++)
+        {
+            tmp = target-nums[i];
+            if(maps.count(tmp) && i != maps[tmp])
+                break;
+        }
+        return {i, maps[tmp]};
+    }
+};
+```
+
+2024/4/16 : 但是有個疑問, unorder_map的key能重複嗎?
