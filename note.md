@@ -89,5 +89,25 @@ public:
 };
 ```
 2024/4/17 : 為什麼把初始化maps那段拿掉會跑不過, 難道沒有初始化maps成功?</br>
-
+2024/4/23 : 不用做maps[nums[i]] = 0, 跑不過的原因在沒有初始化就使用maps.count()</br>
 2024/4/17 : 如何歷遍maps的成員, 型別是什麼?</br>
+2024/4/23 : 可以使用for(auto it : maps)也可以使用for(auto it = maps.begin(); it != maps.end(); it++)</br>
+
+## leetcode 215
+```c++
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        int i;
+        priority_queue<int> pq;
+        for(i=0; i<nums.size(); i++)
+            pq.push(nums[i]);
+        for(i=0; i<k-1; i++)
+        {
+            cout<<pq.top()<<endl;
+            pq.pop();
+        }
+        return pq.top();
+    }
+};
+```
