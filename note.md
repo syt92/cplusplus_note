@@ -111,3 +111,41 @@ public:
     }
 };
 ```
+
+## leetcode 101
+```c++
+class Solution {
+public:
+    vector<int> left;
+    vector<int> right;
+    void DFS_left(TreeNode* node){
+        if(node != NULL)
+        {
+            left.push_back(node->val);
+            DFS_left(node->left);
+            DFS_left(node->right);
+        }
+        else
+        {
+            left.push_back(101);
+        }
+    }
+    void DFS_right(TreeNode* node){
+        if(node != NULL)
+        {
+            right.push_back(node->val);
+            DFS_right(node->right);          
+            DFS_right(node->left);
+        }
+        else
+        {
+            right.push_back(101);
+        }
+    }
+    bool isSymmetric(TreeNode* root) {
+        DFS_left(root->left);
+        DFS_right(root->right);
+        return left == right;
+    }
+};
+```
