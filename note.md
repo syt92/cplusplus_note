@@ -112,40 +112,49 @@ public:
 };
 ```
 
-## leetcode 101
+## leetcode 94
+```c++
+class Solution {
+    vector<int> ans;
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        if(root == NULL)
+            return ans;
+        inorderTraversal(root->left);
+        ans.push_back(root->val);
+        inorderTraversal(root->right);
+        return ans;
+    }
+};
+```
+
+## leetcode 100
 ```c++
 class Solution {
 public:
-    vector<int> left;
-    vector<int> right;
-    void DFS_left(TreeNode* node){
-        if(node != NULL)
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        if(p == q)
         {
-            left.push_back(node->val);
-            DFS_left(node->left);
-            DFS_left(node->right);
+            return true;
+        }
+        else if(((p == NULL)&&(q != NULL)) || ((q == NULL)&&(p != NULL)))
+        {
+            return false;
         }
         else
         {
-            left.push_back(101);
+            if(p->val != q->val)
+            {
+                return false;
+            } 
+            else
+            {
+                if(isSameTree(p->left, q->left) && isSameTree(p->right, q->right))
+                    return true;
+                else
+                    return false;
+            }         
         }
-    }
-    void DFS_right(TreeNode* node){
-        if(node != NULL)
-        {
-            right.push_back(node->val);
-            DFS_right(node->right);          
-            DFS_right(node->left);
-        }
-        else
-        {
-            right.push_back(101);
-        }
-    }
-    bool isSymmetric(TreeNode* root) {
-        DFS_left(root->left);
-        DFS_right(root->right);
-        return left == right;
     }
 };
 ```
